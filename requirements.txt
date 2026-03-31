@@ -5,3 +5,8 @@ requests
 python-dotenv
 gunicorn
 pydantic
+
+# Testing
+pytest
+pytest-mock
+httpx
