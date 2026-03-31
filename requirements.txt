@@ -1,6 +1,6 @@
-FastAPI
-Uvicorn
-BeautifulSoup4
+fastapi
+uvicorn[standard]
+beautifulsoup4
 requests
 python-dotenv
 gunicorn
