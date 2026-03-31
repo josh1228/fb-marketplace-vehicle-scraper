@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FB Car Deal Finder – Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <header class="page-header">
+    <span class="page-icon">🚗</span>
+    <div>
+      <h1 class="page-title">FB Car Deal Finder</h1>
+      <p class="page-subtitle">Extension Settings</p>
+    </div>
+  </header>
+
+  <!-- ── Auto-Scan ─────────────────────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">🔄 Auto-Scan</h2>
+    <div class="form-group">
+      <label class="label">
+        <input type="checkbox" id="auto-scan-enabled" />
+        Enable auto-scan
+      </label>
+      <p class="hint">When enabled, the extension will automatically open / refresh a Facebook Marketplace tab at the interval below.</p>
+    </div>
+    <div class="form-group">
+      <label class="label" for="scan-interval">Scan interval (minutes)</label>
+      <input type="number" id="scan-interval" class="input" min="1" max="1440" value="5" />
+      <p class="hint">Minimum 1 minute. Recommended: 5–15 minutes to stay within Facebook's rate limits.</p>
+    </div>
+  </section>
+
+  <!-- ── Deal Scoring ───────────────────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">🏆 Deal Scoring</h2>
+    <div class="form-group">
+      <label class="label" for="score-threshold">Hot-deal score threshold (0–100)</label>
+      <input type="number" id="score-threshold" class="input" min="0" max="100" value="60" />
+      <p class="hint">Listings scoring at or above this value are flagged as "hot deals" and will trigger notifications.</p>
+    </div>
+    <div class="form-group">
+      <label class="label" for="max-stored-deals">Maximum stored deals</label>
+      <input type="number" id="max-stored-deals" class="input" min="10" max="1000" value="200" />
+      <p class="hint">Older deals are pruned automatically once this limit is reached.</p>
+    </div>
+  </section>
+
+  <!-- ── Search Filters ────────────────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">🔍 Default Search Filters</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="label" for="max-price">Max price ($)</label>
+        <input type="number" id="max-price" class="input" min="0" placeholder="e.g. 20000" />
+      </div>
+      <div class="form-group">
+        <label class="label" for="min-year">Min year</label>
+        <input type="number" id="min-year" class="input" min="1900" max="2099" placeholder="e.g. 2015" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="label" for="max-mileage">Max mileage</label>
+        <input type="number" id="max-mileage" class="input" min="0" placeholder="e.g. 100000" />
+      </div>
+      <div class="form-group">
+        <label class="label" for="search-keyword">Keyword</label>
+        <input type="text" id="search-keyword" class="input" placeholder="e.g. Honda Civic" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Notifications ─────────────────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">🔔 Notifications</h2>
+    <div class="form-group">
+      <label class="label">
+        <input type="checkbox" id="notifications-enabled" />
+        Enable desktop notifications for hot deals
+      </label>
+      <p class="hint">You will receive a Chrome notification whenever a new listing is detected above the hot-deal score threshold.</p>
+    </div>
+  </section>
+
+  <!-- ── Actions ───────────────────────────────────────────────────────────── -->
+  <div class="actions">
+    <button id="btn-save"  class="btn btn-primary">💾 Save Settings</button>
+    <button id="btn-reset" class="btn">↩ Reset to Defaults</button>
+    <button id="btn-clear" class="btn btn-danger">🗑 Clear All Stored Deals</button>
+  </div>
+
+  <p id="save-msg" class="save-msg hidden">✓ Settings saved!</p>
+
+  <!-- ── About ─────────────────────────────────────────────────────────────── -->
+  <section class="section about">
+    <h2 class="section-title">ℹ About</h2>
+    <p class="hint">
+      <strong>FB Marketplace Car Deal Finder</strong> v1.0.0<br />
+      This extension is provided for educational purposes only.
+      Ensure you comply with Facebook's Terms of Service before use.
+      Deal scores are estimates based on price, year, and mileage — always do your own research!
+    </p>
+  </section>
+
+</div>
+
+<script src="options.js"></script>
+</body>
+</html>

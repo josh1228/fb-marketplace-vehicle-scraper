@@ -1,0 +1,270 @@
+/* ─── Reset / Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 13px;
+  background: #f3f4f6;
+  color: #111827;
+  width: 420px;
+  min-height: 520px;
+  max-height: 620px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #1877f2 0%, #0d5cbf 100%);
+  color: #fff;
+  padding: 8px 12px;
+  flex-shrink: 0;
+}
+.header-brand { display: flex; align-items: center; gap: 6px; }
+.header-icon  { font-size: 20px; }
+.header-title { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+.header-actions { display: flex; gap: 5px; }
+
+/* ─── Status Bar ────────────────────────────────────────────────────────────── */
+.status-bar {
+  background: #e5e7eb;
+  padding: 3px 12px;
+  font-size: 11px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  background: #e5e7eb;
+  color: #374151;
+  text-decoration: none;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn:hover              { background: #d1d5db; }
+.btn.btn-primary        { background: #1877f2; color: #fff; }
+.btn.btn-primary:hover  { background: #1465d0; }
+.btn.btn-danger         { background: #fee2e2; color: #b91c1c; }
+.btn.btn-danger:hover   { background: #fecaca; }
+.btn.btn-sm             { padding: 3px 8px; font-size: 11px; }
+.btn.btn-xs             { padding: 2px 6px; font-size: 10px; }
+.btn.btn-active         { background: #16a34a; color: #fff; }
+.btn.btn-active:hover   { background: #15803d; }
+
+/* ─── Badges ────────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.4px;
+}
+.badge-blue  { background: #dbeafe; color: #1e40af; }
+.badge-green { background: #dcfce7; color: #15803d; }
+.badge-amber { background: #fef9c3; color: #92400e; }
+.badge-red   { background: #fee2e2; color: #b91c1c; }
+.hidden { display: none !important; }
+
+/* ─── Tabs ───────────────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 2px solid #e5e7eb;
+  flex-shrink: 0;
+}
+.tab {
+  flex: 1;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 4px;
+  color: #6b7280;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab:hover  { color: #374151; }
+.tab.active { color: #1877f2; border-bottom-color: #1877f2; }
+
+/* ─── Tab Content ────────────────────────────────────────────────────────────── */
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 10px;
+}
+
+/* ─── Toolbar (Deals tab) ────────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.toolbar-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #374151;
+}
+
+/* ─── Deals List ─────────────────────────────────────────────────────────────── */
+.deals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.deal-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  box-shadow: 0 1px 3px rgba(0,0,0,.07);
+  transition: box-shadow 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+.deal-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.14); }
+.deal-card.hot   { border-left: 3px solid #16a34a; }
+.deal-thumb {
+  width: 60px;
+  height: 45px;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #e5e7eb;
+}
+.deal-thumb-placeholder {
+  width: 60px; height: 45px;
+  border-radius: 5px;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.deal-info     { flex: 1; min-width: 0; }
+.deal-title    { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.deal-meta     { font-size: 11px; color: #6b7280; margin-top: 2px; }
+.deal-price    { font-size: 13px; font-weight: 700; color: #111827; }
+.deal-actions  { display: flex; gap: 4px; margin-top: 4px; }
+.deal-score-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.empty-msg { color: #9ca3af; font-size: 12px; text-align: center; padding: 20px 0; }
+
+/* ─── Form helpers ───────────────────────────────────────────────────────────── */
+.section-hint { font-size: 11px; color: #6b7280; margin-bottom: 10px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.form-label    { display: flex; flex-direction: column; gap: 3px; font-size: 12px; font-weight: 500; color: #374151; }
+.form-label-sm { display: flex; flex-direction: column; gap: 2px; font-size: 11px; font-weight: 500; color: #374151; }
+.form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.input {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #111827;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+.input:focus { outline: none; border-color: #1877f2; }
+.input-sm {
+  padding: 3px 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 11px;
+  color: #111827;
+  background: #fff;
+}
+.input-sm:focus { outline: none; border-color: #1877f2; }
+.filter-actions { display: flex; gap: 8px; margin-top: 10px; }
+.save-msg { font-size: 11px; color: #16a34a; margin-top: 6px; }
+
+/* ─── Tools ──────────────────────────────────────────────────────────────────── */
+.tool-card {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 7px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+.tool-title {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 10px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #111827;
+}
+.tool-title::-webkit-details-marker { display: none; }
+.tool-title::before { content: "▶"; font-size: 9px; color: #9ca3af; transition: transform 0.2s; }
+details[open] .tool-title::before { transform: rotate(90deg); }
+.tool-body { padding: 0 10px 10px; }
+.tool-desc { font-size: 11px; color: #6b7280; margin-bottom: 8px; }
+
+/* Stats grid */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.stat { display: flex; flex-direction: column; align-items: center; background: #f9fafb; border-radius: 6px; padding: 6px 4px; }
+.stat-label { font-size: 10px; color: #9ca3af; margin-bottom: 2px; }
+.stat span:last-child { font-size: 13px; font-weight: 700; }
+
+/* Calculator result */
+.calc-result {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Compare result */
+.compare-result { margin-top: 8px; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.compare-table th, .compare-table td { padding: 4px 6px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+.compare-table th { background: #f3f4f6; font-weight: 700; }
+
+/* Price drops */
+.deals-list-mini { max-height: 120px; overflow-y: auto; }
+
+/* Toggle */
+.toggle-label { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+.toggle-label input[type=checkbox] { width: 14px; height: 14px; cursor: pointer; }
+
+/* Compare inputs */
+.compare-id-input { margin-bottom: 5px; font-size: 11px; }
