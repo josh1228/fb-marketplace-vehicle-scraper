@@ -444,9 +444,17 @@ def scrape_real_estate(request: RealEstateRequest) -> RealEstateResponse:
 
     Supported sources: ``zillow``, ``redfin``, ``realtor``, ``all``.
     """
-    all_listings: list[PropertyListing] = []
-
     source = request.source.lower()
+
+    if source not in ("zillow", "redfin", "realtor", "all"):
+        return RealEstateResponse(
+            success=False,
+            count=0,
+            listings=[],
+            message=f"Unknown source '{source}'. Choose from: zillow, redfin, realtor, all.",
+        )
+
+    all_listings: list[PropertyListing] = []
 
     if source in ("zillow", "all"):
         all_listings.extend(scrape_zillow(request))
@@ -456,14 +464,6 @@ def scrape_real_estate(request: RealEstateRequest) -> RealEstateResponse:
 
     if source in ("realtor", "all"):
         all_listings.extend(scrape_realtor(request))
-
-    if source not in ("zillow", "redfin", "realtor", "all"):
-        return RealEstateResponse(
-            success=False,
-            count=0,
-            listings=[],
-            message=f"Unknown source '{source}'. Choose from: zillow, redfin, realtor, all.",
-        )
 
     # When source is "all", honor max_results across the combined set
     if source == "all":
