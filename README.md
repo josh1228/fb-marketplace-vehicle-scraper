@@ -1,25 +1,21 @@
 # fb-marketplace-vehicle-scraper
 
 > **Educational purposes only.**  
-> Scraping Facebook Marketplace, Zillow, Redfin, and Realtor.com may violate those platforms' Terms of Service. Review and comply with each platform's terms before using this project.
+> Scraping Facebook Marketplace may violate Facebook's Terms of Service. Review and comply with the platform's terms before using this project.
 
 ## Overview
 
-A FastAPI-based REST API that scrapes:
-
-- **Vehicle listings** from Facebook Marketplace (using `requests` + `BeautifulSoup4`)
-- **Real-estate listings** from Zillow, Redfin, and Realtor.com
+A FastAPI-based REST API that scrapes vehicle listings from Facebook Marketplace using `requests` and `BeautifulSoup4`.
 
 ## Project Structure
 
 ```
-├── config.py                # Environment-driven configuration
-├── models.py                # Pydantic data models
-├── scraper.py               # Facebook Marketplace vehicle scraping logic
-├── real_estate_scraper.py   # Zillow / Redfin / Realtor.com scraping logic
-├── main.py                  # FastAPI application
-├── Procfile                 # Heroku entry point
-└── requirements.txt         # Python dependencies
+├── config.py          # Environment-driven configuration
+├── models.py          # Pydantic data models
+├── scraper.py         # Core scraping logic
+├── main.py            # FastAPI application
+├── Procfile           # Heroku entry point
+└── requirements.txt   # Python dependencies
 ```
 
 ## Setup
@@ -50,12 +46,8 @@ Interactive docs: `http://localhost:8000/docs`
 ### `GET /`
 Health check.
 
----
-
-### Vehicle Endpoints
-
-#### `POST /scrape`
-Scrape vehicle listings from Facebook Marketplace.
+### `POST /scrape`
+Scrape vehicle listings.
 
 **Request body (JSON):**
 ```json
@@ -88,73 +80,11 @@ Scrape vehicle listings from Facebook Marketplace.
 }
 ```
 
-#### `GET /scrape`
+### `GET /scrape`
 Same as POST but via query parameters:
 ```
 GET /scrape?location=new-york-ny&vehicle_type=cars-trucks&max_price=15000
 ```
-
----
-
-### Real-Estate Endpoints (Zillow · Redfin · Realtor.com)
-
-#### `POST /real-estate/scrape`
-Scrape property listings from Zillow, Redfin, and/or Realtor.com.
-
-**Request body (JSON):**
-```json
-{
-  "location":      "New York, NY",
-  "min_price":     300000,
-  "max_price":     800000,
-  "min_beds":      2,
-  "max_beds":      4,
-  "property_type": "house",
-  "max_results":   20,
-  "source":        "all"
-}
-```
-
-| Field           | Type    | Default        | Description                                              |
-|-----------------|---------|----------------|----------------------------------------------------------|
-| `location`      | string  | `New York, NY` | City and state                                           |
-| `min_price`     | integer | —              | Minimum listing price (USD)                              |
-| `max_price`     | integer | —              | Maximum listing price (USD)                              |
-| `min_beds`      | integer | —              | Minimum number of bedrooms                               |
-| `max_beds`      | integer | —              | Maximum number of bedrooms                               |
-| `property_type` | string  | —              | e.g. `house`, `condo`, `townhouse`                       |
-| `max_results`   | integer | `20`           | Maximum listings to return                               |
-| `source`        | string  | `all`          | `zillow`, `redfin`, `realtor`, or `all`                  |
-
-**Response:**
-```json
-{
-  "success": true,
-  "count": 6,
-  "listings": [
-    {
-      "listing_id": "987654321",
-      "address": "123 Main St, New York, NY 10001",
-      "price": "$649,000",
-      "beds": "3",
-      "baths": "2",
-      "sqft": "1,450",
-      "property_type": null,
-      "image_url": "https://...",
-      "listing_url": "https://www.zillow.com/homedetails/...",
-      "source": "zillow"
-    }
-  ]
-}
-```
-
-#### `GET /real-estate/scrape`
-Same as POST but via query parameters:
-```
-GET /real-estate/scrape?location=Austin%2C+TX&max_price=500000&min_beds=3&source=zillow
-```
-
----
 
 ## Configuration
 
