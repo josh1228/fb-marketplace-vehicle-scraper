@@ -14,6 +14,8 @@ class VehicleListing(BaseModel):
     image_url: Optional[str] = None
     listing_url: Optional[str] = None
     description: Optional[str] = None
+    deal_score: Optional[float] = None
+    is_good_deal: Optional[bool] = None
 
 
 class ScrapeRequest(BaseModel):
@@ -23,6 +25,7 @@ class ScrapeRequest(BaseModel):
     max_mileage: Optional[int] = None
     vehicle_type: str = "cars-trucks"
     max_results: int = 20
+    analyze_deals: bool = True
 
 
 class ScrapeResponse(BaseModel):

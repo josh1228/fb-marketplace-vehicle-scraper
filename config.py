@@ -8,5 +8,8 @@ API_PORT = int(os.getenv('API_PORT', 8080))
 DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///:memory:')
 USER_AGENT = os.getenv('USER_AGENT', 'fb-marketplace-scraper')
 
+# Minimum deal_score (range –1 to 1) for a listing to be considered a good deal.
+DEAL_SCORE_THRESHOLD = float(os.getenv('DEAL_SCORE_THRESHOLD', 0.1))
+
 # Configuration settings for the scraper
 

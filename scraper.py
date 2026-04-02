@@ -21,6 +21,7 @@ from config import (
     SCRAPER_TIMEOUT,
     USER_AGENT,
 )
+from deal_analyzer import score_listings
 from models import ScrapeRequest, ScrapeResponse, VehicleListing
 
 logger = logging.getLogger(__name__)
@@ -148,6 +149,9 @@ def scrape_vehicles(request: ScrapeRequest) -> ScrapeResponse:
         listing = _parse_listing(card)
         if listing:
             listings.append(listing)
+
+    if request.analyze_deals and listings:
+        score_listings(listings)
 
     logger.info("Scraped %d listings", len(listings))
     return ScrapeResponse(
