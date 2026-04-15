@@ -15,7 +15,12 @@ A FastAPI-based REST API that scrapes vehicle listings from Facebook Marketplace
 ├── scraper.py         # Core scraping logic
 ├── main.py            # FastAPI application
 ├── Procfile           # Heroku entry point
-└── requirements.txt   # Python dependencies
+├── requirements.txt   # Python dependencies
+├── .env.example       # Example environment variables
+└── tests/
+    ├── test_models.py  # Model validation tests
+    ├── test_scraper.py # Scraper unit tests
+    └── test_main.py    # API endpoint tests
 ```
 
 ## Setup
@@ -40,6 +45,12 @@ uvicorn main:app --reload
 
 The API will be available at `http://localhost:8000`.  
 Interactive docs: `http://localhost:8000/docs`
+
+## Running Tests
+
+```bash
+pytest tests/ -v
+```
 
 ## API Endpoints
 
