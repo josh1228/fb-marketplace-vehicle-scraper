@@ -29,6 +29,9 @@ cd fb-marketplace-vehicle-scraper
 # Install dependencies
 pip install -r requirements.txt
 
+# Install Playwright browser binaries (required for TikTok scraping)
+playwright install chromium
+
 # (Optional) copy and edit environment variables
 cp .env.example .env
 ```
@@ -135,16 +138,26 @@ GET /tiktok/scrape?keyword=abilify&max_results=20
 
 Set the following environment variables (or add them to a `.env` file):
 
-| Variable            | Default              | Description                          |
-|---------------------|----------------------|--------------------------------------|
-| `SCRAPER_RATE_LIMIT`| `10`                 | Max requests per minute              |
-| `SCRAPER_TIMEOUT`   | `30`                 | HTTP request timeout (seconds)       |
-| `SCRAPER_RETRIES`   | `3`                  | Number of retry attempts on failure  |
-| `API_HOST`          | `localhost`          | API host                             |
-| `API_PORT`          | `8080`               | API port                             |
-| `USER_AGENT`        | `fb-marketplace-scraper` | User-Agent header for requests   |
+| Variable            | Default              | Description                                                        |
+|---------------------|----------------------|--------------------------------------------------------------------|
+| `SCRAPER_RATE_LIMIT`| `10`                 | Max requests per minute                                            |
+| `SCRAPER_TIMEOUT`   | `30`                 | HTTP request timeout (seconds)                                     |
+| `SCRAPER_RETRIES`   | `3`                  | Number of retry attempts on failure                                |
+| `API_HOST`          | `localhost`          | API host                                                           |
+| `API_PORT`          | `8080`               | API port                                                           |
+| `USER_AGENT`        | `fb-marketplace-scraper` | User-Agent header for requests                                 |
+| `TIKTOK_MS_TOKEN`   | *(not set)*          | TikTok `msToken` cookie — improves reliability of TikTok scraping |
+
+### Obtaining `TIKTOK_MS_TOKEN`
+
+1. Open [tiktok.com](https://www.tiktok.com) in Chrome/Firefox and log in (or stay logged out — the cookie is still set).
+2. Open DevTools → **Application** tab → **Cookies** → `https://www.tiktok.com`.
+3. Copy the value of the `msToken` cookie.
+4. Set it as the `TIKTOK_MS_TOKEN` environment variable.
 
 ## Heroku Deployment
+
+The `Procfile` includes a `release` phase that automatically installs the Chromium browser binary before the web dyno starts (required for TikTok scraping).
 
 ```bash
 # Create a new Heroku app
@@ -155,4 +168,5 @@ git push heroku main
 
 # Set environment variables
 heroku config:set SCRAPER_RATE_LIMIT=5
+heroku config:set TIKTOK_MS_TOKEN=<your_ms_token>
 ```

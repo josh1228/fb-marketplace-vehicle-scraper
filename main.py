@@ -84,7 +84,7 @@ def scrape_get(
     response_model=TikTokScrapeResponse,
     summary="Scrape TikTok videos by keyword",
 )
-def tiktok_scrape(request: TikTokScrapeRequest):
+async def tiktok_scrape(request: TikTokScrapeRequest):
     """
     Scrape TikTok for videos matching a keyword (e.g. *abilify*).
 
@@ -92,7 +92,7 @@ def tiktok_scrape(request: TikTokScrapeRequest):
     - **max_results**: Maximum number of videos to return (default 20)
     """
     try:
-        result = scrape_tiktok(request)
+        result = await scrape_tiktok(request)
         return result
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
@@ -103,11 +103,11 @@ def tiktok_scrape(request: TikTokScrapeRequest):
     response_model=TikTokScrapeResponse,
     summary="Scrape TikTok videos by keyword (GET)",
 )
-def tiktok_scrape_get(keyword: str = "abilify", max_results: int = 20):
+async def tiktok_scrape_get(keyword: str = "abilify", max_results: int = 20):
     """Convenience GET endpoint — same behavior as the POST endpoint."""
     request = TikTokScrapeRequest(keyword=keyword, max_results=max_results)
     try:
-        result = scrape_tiktok(request)
+        result = await scrape_tiktok(request)
         return result
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
