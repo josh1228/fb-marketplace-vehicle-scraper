@@ -5,5 +5,5 @@ requests
 python-dotenv
 gunicorn
 pydantic
-TikTokApi
-playwright
+TikTokApi==7.3.3
+playwright==1.59.0

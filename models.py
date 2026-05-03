@@ -15,10 +15,22 @@ class TikTokVideo(BaseModel):
     cover_url: Optional[str] = None
     video_url: Optional[str] = None
     created_at: Optional[int] = None
+    hashtags: list[str] = []
+    sound_title: Optional[str] = None
 
 
 class TikTokScrapeRequest(BaseModel):
     keyword: str = "abilify"
+    max_results: int = 20
+
+
+class TikTokHashtagRequest(BaseModel):
+    hashtag: str = "abilify"
+    max_results: int = 20
+
+
+class TikTokUserRequest(BaseModel):
+    username: str
     max_results: int = 20
 
 

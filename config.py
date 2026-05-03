@@ -13,5 +13,8 @@ USER_AGENT = os.getenv('USER_AGENT', 'fb-marketplace-scraper')
 # rate-limit or block requests.  Set via the TIKTOK_MS_TOKEN environment variable.
 TIKTOK_MS_TOKEN = os.getenv('TIKTOK_MS_TOKEN')
 
+# Optional HTTP/SOCKS proxy for TikTok requests, e.g. "http://user:pass@host:port"
+TIKTOK_PROXY = os.getenv('TIKTOK_PROXY')
+
 # Configuration settings for the scraper
 
