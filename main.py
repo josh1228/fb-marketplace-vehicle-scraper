@@ -1,5 +1,6 @@
 """
-FastAPI application for the Facebook Marketplace vehicle scraper.
+FastAPI application for the Facebook Marketplace vehicle scraper
+and TikTok keyword scraper.
 """
 
 import logging
@@ -7,8 +8,9 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 
-from models import ScrapeRequest, ScrapeResponse
+from models import ScrapeRequest, ScrapeResponse, TikTokScrapeRequest, TikTokScrapeResponse
 from scraper import scrape_vehicles
+from tiktok_scraper import scrape_tiktok
 
 logging.basicConfig(level=logging.INFO)
 
@@ -69,6 +71,43 @@ def scrape_get(
     )
     try:
         result = scrape_vehicles(request)
+        return result
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+# ── TikTok endpoints ──────────────────────────────────────────────────────────
+
+
+@app.post(
+    "/tiktok/scrape",
+    response_model=TikTokScrapeResponse,
+    summary="Scrape TikTok videos by keyword",
+)
+def tiktok_scrape(request: TikTokScrapeRequest):
+    """
+    Scrape TikTok for videos matching a keyword (e.g. *abilify*).
+
+    - **keyword**: Search term (default `abilify`)
+    - **max_results**: Maximum number of videos to return (default 20)
+    """
+    try:
+        result = scrape_tiktok(request)
+        return result
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@app.get(
+    "/tiktok/scrape",
+    response_model=TikTokScrapeResponse,
+    summary="Scrape TikTok videos by keyword (GET)",
+)
+def tiktok_scrape_get(keyword: str = "abilify", max_results: int = 20):
+    """Convenience GET endpoint — same behavior as the POST endpoint."""
+    request = TikTokScrapeRequest(keyword=keyword, max_results=max_results)
+    try:
+        result = scrape_tiktok(request)
         return result
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc

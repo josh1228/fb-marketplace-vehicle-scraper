@@ -2,6 +2,36 @@ from typing import Optional
 from pydantic import BaseModel
 
 
+# ── TikTok models ─────────────────────────────────────────────────────────────
+
+class TikTokVideo(BaseModel):
+    video_id: Optional[str] = None
+    author: Optional[str] = None
+    description: Optional[str] = None
+    play_count: Optional[int] = None
+    like_count: Optional[int] = None
+    comment_count: Optional[int] = None
+    share_count: Optional[int] = None
+    cover_url: Optional[str] = None
+    video_url: Optional[str] = None
+    created_at: Optional[int] = None
+
+
+class TikTokScrapeRequest(BaseModel):
+    keyword: str = "abilify"
+    max_results: int = 20
+
+
+class TikTokScrapeResponse(BaseModel):
+    success: bool
+    count: int
+    keyword: str
+    videos: list[TikTokVideo]
+    message: Optional[str] = None
+
+
+# ── Facebook Marketplace models ────────────────────────────────────────────────
+
 class VehicleListing(BaseModel):
     listing_id: Optional[str] = None
     title: str

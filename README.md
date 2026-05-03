@@ -10,12 +10,13 @@ A FastAPI-based REST API that scrapes vehicle listings from Facebook Marketplace
 ## Project Structure
 
 ```
-├── config.py          # Environment-driven configuration
-├── models.py          # Pydantic data models
-├── scraper.py         # Core scraping logic
-├── main.py            # FastAPI application
-├── Procfile           # Heroku entry point
-└── requirements.txt   # Python dependencies
+├── config.py             # Environment-driven configuration
+├── models.py             # Pydantic data models
+├── scraper.py            # FB Marketplace scraping logic
+├── tiktok_scraper.py     # TikTok keyword scraping logic
+├── main.py               # FastAPI application
+├── Procfile              # Heroku entry point
+└── requirements.txt      # Python dependencies
 ```
 
 ## Setup
@@ -84,6 +85,50 @@ Scrape vehicle listings.
 Same as POST but via query parameters:
 ```
 GET /scrape?location=new-york-ny&vehicle_type=cars-trucks&max_price=15000
+```
+
+---
+
+## TikTok Endpoints
+
+### `POST /tiktok/scrape`
+Scrape TikTok for videos matching a keyword.
+
+**Request body (JSON):**
+```json
+{
+  "keyword": "abilify",
+  "max_results": 20
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "count": 5,
+  "keyword": "abilify",
+  "videos": [
+    {
+      "video_id": "7123456789012345678",
+      "author": "someuser",
+      "description": "My experience with Abilify #abilify #mentalhealth",
+      "play_count": 45000,
+      "like_count": 3200,
+      "comment_count": 180,
+      "share_count": 75,
+      "cover_url": "https://...",
+      "video_url": "https://...",
+      "created_at": 1714000000
+    }
+  ]
+}
+```
+
+### `GET /tiktok/scrape`
+Same as POST but via query parameters:
+```
+GET /tiktok/scrape?keyword=abilify&max_results=20
 ```
 
 ## Configuration
